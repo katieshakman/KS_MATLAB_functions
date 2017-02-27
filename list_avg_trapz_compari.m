@@ -2,7 +2,8 @@
 % also evoked peak comparison
 
 clear all; close all;
-% addpath('/Users/katieshak/code/MATLAB-extras/');
+% addpath('/Users/katieshak/code/MATLAB-extras/'); 
+% addpath('/Useres/katherineshakman/code/MATLAB-extras/');
 %%
 myFolder = pwd;
 % odors = {'oil', 'Oct', 'Vin','OctVin', 'H2O'};
@@ -29,9 +30,9 @@ odorB = odors{1,2};
 % '/Users/katieshak/Desktop/Data_Analysis_Temp/Data_Analysis/2016_04_05_Live/br2_NonTet_Ctrl/p1_hemi1_topRight';...
 % '/Users/katieshak/Desktop/Data_Analysis_Temp/Data_Analysis/2016_04_07_Live/br3_NonTeT_Ctrl/p1_hemi1_topRight';...
 % };
-dataDirList = {... 
-    '/Users/katieshak/Desktop/Data_Analysis_Temp/Data_Analysis/2016_08_08_Live/br2_82C10LexA6f/p1_hemi1_L_Border_mv1'};
-
+% dataDirList = {... 
+%     '/Users/katieshak/Desktop/Data_Analysis_Temp/Data_Analysis/2016_08_08_Live/br2_82C10LexA6f/p1_hemi1_L_Border_mv1'};
+dataDirList = {'/Users/katherineshakman/Desktop/Analysis_Temp/Data_Analysis/2016_11_08_Live/br2_V1Tet_71D08L6f/p1_hemi1_R'}; 
 
 dataDirList = flipud(dataDirList);
 exptID = cell(dataDirList); % init
