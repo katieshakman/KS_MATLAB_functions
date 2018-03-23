@@ -4,7 +4,7 @@ function AOC_trapz_compare(odors)
 % For each fly/trial set: 
 
     % Get best trial from set (collection of odors for one fly)
-    allDataInLabels = dir('*AOC*');
+    allDataInLabels = dir('*AOC*.mat');
     vec_count = 0; % init
     avg_count = 0; 
     odor_count = 0; 
