@@ -1,4 +1,4 @@
-function varargout=sigstar(groups,stats,nosort)
+function varargout=sigstarKS(groups,stats,nosort,contrastColor)
     % sigstar - Add significance stars to bar charts, boxplots, line charts, etc,
     %
     % H = sigstar(groups,stats,nsort)
@@ -72,38 +72,38 @@ function varargout=sigstar(groups,stats,nosort)
 
     %Input argument error checking
 
-    %If the user entered just one group pair and forgot to wrap it in a cell array 
-    %then we'll go easy on them and wrap it here rather then generate an error
-    if ~iscell(groups) & length(groups)==2
-        groups={groups};
-    end
-
-    if nargin<2 
-        stats=repmat(0.05,1,length(groups));
-    end
-    if isempty(stats)
-        stats=repmat(0.05,1,length(groups));
-    end
-    if nargin<3
-        nosort=0;
-    end
-
-
+%     %If the user entered just one group pair and forgot to wrap it in a cell array 
+%     %then we'll go easy on them and wrap it here rather then generate an error
+%     if ~iscell(groups) & length(groups)==2
+%         groups={groups};
+%     end
+% 
+%     if nargin<2 
+%         stats=repmat(0.05,1,length(groups));
+%     end
+%     if isempty(stats)
+%         stats=repmat(0.05,1,length(groups));
+%     end
+%     if nargin<3
+%         nosort=0;
+%     end
 
 
-    %Check the inputs are of the right sort
-    if ~iscell(groups)
-        error('groups must be a cell array')
-    end
 
-    if ~isvector(stats)
-        error('stats must be a vector')
-    end
 
-    if length(stats)~=length(groups)
-        error('groups and stats must be the same length')
-    end
-
+%     %Check the inputs are of the right sort
+%     if ~iscell(groups)
+%         error('groups must be a cell array')
+%     end
+% 
+%     if ~isvector(stats)
+%         error('stats must be a vector')
+%     end
+% 
+%     if length(stats)~=length(groups)
+%         error('groups and stats must be the same length')
+%     end
+% 
 
 
 
@@ -182,7 +182,7 @@ function varargout=sigstar(groups,stats,nosort)
 
     for ii=1:length(groups)
         thisY=findMinY(xlocs(ii,:))+yd;
-        H(ii,:)=makeSignificanceBar(xlocs(ii,:),thisY,stats(ii));
+        H(ii,:)=makeSignificanceBar(xlocs(ii,:),thisY,stats(ii),contrastColor);
     end
     %-----------------------------------------------------
 
@@ -227,7 +227,7 @@ end %close sigstar
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Internal functions
 
-function H=makeSignificanceBar(x,y,p)
+function H=makeSignificanceBar(x,y,p,contrastColor)
     %makeSignificanceBar produces the bar and defines how many asterisks we get for a 
     %given p-value
 
@@ -248,7 +248,8 @@ function H=makeSignificanceBar(x,y,p)
     x=repmat(x,2,1);
     y=repmat(y,4,1);
 
-    H(1)=plot(x(:),y,'-w','LineWidth',1.5,'Tag','sigstar_bar');
+    H(1)=plot(x(:),y,'-','Color',contrastColor,'LineWidth',1.5,'Tag','sigstar_bar');
+%     H(1)=plot(x(:),y,'-w','LineWidth',1.5,'Tag','sigstar_bar');
 
     %Increase offset between line and text if we will print "n.s."
     %instead of a star. 

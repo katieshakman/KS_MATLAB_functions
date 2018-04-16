@@ -5,6 +5,7 @@ clear all; close all;
 % addpath('/Users/katieshak/code/MATLAB-extras/'); 
 % addpath('/Users/katherineshakman/code/MATLAB-extras/');
 %%
+cd /Volumes/KATIELAB1/Data_Analysis/2015_10_13_Live/br1_58B_6fA/p1_hemi1/2-oct; 
 myFolder = pwd;
 % odors = {'oil', 'Oct', 'Vin','OctVin', 'H2O'};
 odors = {'oil', 'oct','mch','far','ipa','hac','ben'};
@@ -147,11 +148,13 @@ hleg = legend(exptID,'Location','SouthEast');
 odorMeans = mean(allNormAvg_list,2); 
 [meansSorted,meansOrder] = sort(odorMeans);
 allNormAvg_list_sorted = allNormAvg_list(meansOrder,:); 
+
 cmap = lines(length(odors)); 
 redLineColor = cmap(2,:); 
 greenLineColor = cmap(5,:); 
+
+figure; whitebg('w'); 
 hold all;
-plot(1:length(odors),meansSorted,'k+'); 
 x_vec = ones(1,nBrains); 
 for odorIdx = 1:length(odors)
     if odorIdx == 1
@@ -169,14 +172,16 @@ for odorIdx = 1:length(odors)
         'MarkerEdgeColor',color,...
         'MarkerSize',5)
 end
+plot(1:length(odors),meansSorted,'k+'); 
 boxplot(allNormAvg_list_sorted','Colors','k')
 set(gca,'xtick',1:length(odors),'xticklabel',odors(1,meansOrder));
 xlim([0 length(odors)+1])
 hold off;
+% hLegend = legend({'Mean Response','No Odor','Aversive Odor','Appetitive Odor'},'Location','SouthEast');
 hLegend = legend({'No Odor','Aversive Odor','Appetitive Odor'},'Location','SouthEast');
-hYLabel = ylabel('Response Magnitude');
+hYLabel = ylabel('Response Magnitude (AUC)');
 hXLabel = xlabel('Odor'); 
-hTitle = title('Odor Responses in V1 Axons .. '); 
+hTitle = title('Odor Responses in V1 Axons  '); 
 hText = text(0,0,''); 
 % Make it prettier
 set( gca                       , ...
@@ -203,8 +208,11 @@ set(gca, ...
   'LineWidth'   , 1         );
 
 set(gcf, 'PaperPositionMode', 'auto');
-print -depsc2 finalPlot1.eps
-close;
+% print -depsc2 odor_valence_independence.eps;
+% cd('/Users/katherineshakman/Dropbox/Axel Lab Dropbox/JClub and LM Papers and Notes/MyPresentations/Figures/'); 
+% print -depsc2 odor_valence_independence.eps
+print -depsc2 '/Users/katherineshakman/Dropbox/Axel Lab Dropbox/JClub and LM Papers and Notes/MyPresentations/KBSColumbiaLatexTemplate/Chapter1/odor_valence_independence.eps'
+% close;
 % print -depsc myEPS.eps
 %% Save figure with specified identifier
 % prompty = 'Type an identifier for the figure:';
